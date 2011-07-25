@@ -55,8 +55,6 @@ NSString *OAuthorizationHeader(NSURL *url, NSString *method, NSData *body, NSStr
 	
 	// combine all parameters
 	NSMutableDictionary *parameters = [[oAuthAuthorizationParameters mutableCopy] autorelease];
-	if(additionalQueryParameters) [parameters addEntriesFromDictionary:additionalQueryParameters];
-	if(additionalBodyParameters) [parameters addEntriesFromDictionary:additionalBodyParameters];
 	
 	// -> UTF-8 -> RFC3986
 	NSMutableDictionary *encodedParameters = [NSMutableDictionary dictionary];
@@ -64,6 +62,9 @@ NSString *OAuthorizationHeader(NSURL *url, NSString *method, NSData *body, NSStr
 		NSString *value = [parameters objectForKey:key];
 		[encodedParameters setObject:[value ab_RFC3986EncodedString] forKey:[key ab_RFC3986EncodedString]];
 	}
+	
+	if(additionalQueryParameters) [encodedParameters addEntriesFromDictionary:additionalQueryParameters];
+	if(additionalBodyParameters) [encodedParameters addEntriesFromDictionary:additionalBodyParameters];
 	
 	NSArray *sortedKeys = [[encodedParameters allKeys] sortedArrayUsingFunction:SortParameter context:encodedParameters];
 	

@@ -18,9 +18,7 @@
 		if([keyValue count] == 2) {
 			NSString *key = [keyValue objectAtIndex:0];
 			NSString *value = [keyValue objectAtIndex:1];
-			value = [value stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-			if(key && value)
-				[dict setObject:value forKey:key];
+			[dict setObject:value forKey:key];
 		}
 	}
 	return [NSDictionary dictionaryWithDictionary:dict];
