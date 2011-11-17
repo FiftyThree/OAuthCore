@@ -34,7 +34,7 @@
 	const char *p = [self UTF8String];
 	unsigned char c;
 	
-	for(; c = *p; p++)
+	for(; (c = *p); p++)
 	{
 		switch(c)
 		{
